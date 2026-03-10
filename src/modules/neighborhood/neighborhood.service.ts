@@ -37,7 +37,7 @@ export class NeighborhoodService {
       neighborhood.contactPhone = neighborhoodDto.contactPhone;
   }
 
-  private async getNeighborhood(uuid: string): Promise<Neighborhood> {
+  async getNeighborhood(uuid: string): Promise<Neighborhood> {
     if (!uuid) throw new BadRequestException('No se envió el uuid');
     const neighborhood = await this.neighborhoodRepository.findOneBy({ uuid });
     if (!neighborhood) throw new NotFoundException('El barrio no existe');
