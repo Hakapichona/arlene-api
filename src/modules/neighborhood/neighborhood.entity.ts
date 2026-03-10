@@ -3,10 +3,12 @@ import {
   CreateDateColumn,
   DeleteDateColumn,
   Entity,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
 import { NeighborhoodStatus } from './enums/neighborhood-status.enum';
+import { Collaborators } from '../collaborators/collaborators.entity';
 
 @Entity()
 export class Neighborhood {
@@ -40,6 +42,12 @@ export class Neighborhood {
 
   @Column({ nullable: true })
   contactPhone?: string;
+
+  @OneToMany(
+    () => Collaborators,
+    (collaborator: Collaborators) => collaborator.neighborhood,
+  )
+  collaborators: Collaborators[];
 
   @CreateDateColumn({ name: 'created_at' })
   createdAt: Date;
