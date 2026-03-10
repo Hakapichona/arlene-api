@@ -22,19 +22,19 @@ export class AuthController {
   }
 
   @UseGuards(JwtAuthGuard)
-  @Get('me')
+  @Get('/me')
   me(@GetUser() user: CurrentUser): AuthMeResponseDto {
     return this.toAuthMeResponseDto(user);
   }
 
-  @Post('login')
+  @Post('/login')
   login(
     @Body() authCredentials: AuthCredentialsDto,
   ): Promise<{ accessToken: string }> {
     return this.authService.login(authCredentials);
   }
 
-  @Post('register')
+  @Post('/register')
   register(@Body() registerDto: RegisterDto): Promise<{ message: string }> {
     return this.authService.register(registerDto);
   }

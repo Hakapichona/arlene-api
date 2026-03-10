@@ -24,7 +24,7 @@ export class UsersService {
     private readonly usersRepository: Repository<Users>,
   ) {}
 
-  private readonly logger = new Logger(UsersService.name);
+  readonly logger = new Logger('UsersService');
 
   private async getUser(uuid: string): Promise<Users> {
     if (!uuid) {
@@ -44,8 +44,8 @@ export class UsersService {
     user: Users,
     dto: CreateUserDto | RegisterDto,
   ): void {
-    user.fullName = dto.fullName.trim();
-    user.phone = dto.phone?.trim();
+    user.fullName = dto.fullName;
+    user.phone = dto.phone;
     user.email = dto.email.trim().toLowerCase();
     user.password = dto.password;
   }
