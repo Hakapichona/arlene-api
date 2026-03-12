@@ -7,6 +7,7 @@ import { UsersModule } from './modules/users/users.module';
 import { AuthModule } from './modules/auth/auth.module';
 import { NeighborhoodModule } from './modules/neighborhood/neighborhood.module';
 import { CollaboratorsModule } from './modules/collaborators/collaborators.module';
+import { PathsModule } from './modules/paths/paths.module';
 
 @Module({
   imports: [
@@ -17,6 +18,7 @@ import { CollaboratorsModule } from './modules/collaborators/collaborators.modul
     AuthModule,
     NeighborhoodModule,
     CollaboratorsModule,
+    PathsModule,
   ],
 })
 export class AppModule implements NestModule {

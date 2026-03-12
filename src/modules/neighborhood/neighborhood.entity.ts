@@ -9,6 +9,7 @@ import {
 } from 'typeorm';
 import { NeighborhoodStatus } from './enums/neighborhood-status.enum';
 import { Collaborators } from '../collaborators/collaborators.entity';
+import { Paths } from '../paths/paths.entity';
 
 @Entity()
 export class Neighborhood {
@@ -48,6 +49,9 @@ export class Neighborhood {
     (collaborator: Collaborators) => collaborator.neighborhood,
   )
   collaborators: Collaborators[];
+
+  @OneToMany(() => Paths, (path: Paths) => path.neighborhood)
+  paths: Paths[];
 
   @CreateDateColumn({ name: 'created_at' })
   createdAt: Date;
