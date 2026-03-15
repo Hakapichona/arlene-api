@@ -56,7 +56,7 @@ export class PathsService {
       await this.neighborhoodService.getNeighborhood(pathDto.neighborhoodUuid);
       const newPath = new Paths();
       this.assignDto(newPath, pathDto);
-      return await this.pathsRepository.save(newPath);
+      await this.pathsRepository.save(newPath);
     } catch (error) {
       this.logger.error(error.message, error.code);
       throw error;
@@ -68,7 +68,7 @@ export class PathsService {
       await this.neighborhoodService.getNeighborhood(pathDto.neighborhoodUuid);
       const path = await this.getPath(uuid);
       this.assignDto(path, pathDto);
-      return await this.pathsRepository.save(path);
+      await this.pathsRepository.save(path);
     } catch (error) {
       this.logger.error(error.message, error.code);
       throw error;

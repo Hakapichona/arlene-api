@@ -73,7 +73,7 @@ export class CollaboratorsService {
       );
       const newCollaborator = new Collaborators();
       this.assignDto(newCollaborator, collaboratorDto);
-      return await this.collaboratorRepository.save(newCollaborator);
+      await this.collaboratorRepository.save(newCollaborator);
     } catch (error) {
       this.logger.error(error.message, error.code);
       throw error;
@@ -87,7 +87,7 @@ export class CollaboratorsService {
       );
       const selectedCollaborator = await this.getCollaborator(uuid);
       this.assignDto(selectedCollaborator, collaboratorDto);
-      return await this.collaboratorRepository.save(selectedCollaborator);
+      await this.collaboratorRepository.save(selectedCollaborator);
     } catch (error) {
       this.logger.error(error.message, error.code);
       throw error;
