@@ -1,11 +1,11 @@
 import { IsDate, IsNotEmpty, IsOptional, IsString } from 'class-validator';
 
 export class PathDto {
-  @IsNotEmpty()
+  @IsNotEmpty({ message: 'La fecha es requerido' })
   @IsDate()
   date: Date;
 
-  @IsNotEmpty()
+  @IsNotEmpty({ message: 'La observacion es requerido' })
   @IsString()
   observations: string;
 
@@ -13,7 +13,7 @@ export class PathDto {
   @IsString()
   additionalInformation?: string;
 
-  @IsNotEmpty()
+  @IsNotEmpty({ message: 'El barrio es requerido' })
   @IsString()
   neighborhoodUuid: string;
 }

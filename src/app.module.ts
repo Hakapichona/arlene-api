@@ -8,6 +8,7 @@ import { AuthModule } from './modules/auth/auth.module';
 import { NeighborhoodModule } from './modules/neighborhood/neighborhood.module';
 import { CollaboratorsModule } from './modules/collaborators/collaborators.module';
 import { PathsModule } from './modules/paths/paths.module';
+import { ElectoralHistoriesModule } from './modules/electoral-histories/electoral-histories.module';
 
 @Module({
   imports: [
@@ -19,6 +20,7 @@ import { PathsModule } from './modules/paths/paths.module';
     NeighborhoodModule,
     CollaboratorsModule,
     PathsModule,
+    ElectoralHistoriesModule,
   ],
 })
 export class AppModule implements NestModule {

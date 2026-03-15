@@ -10,6 +10,7 @@ import {
 import { NeighborhoodStatus } from './enums/neighborhood-status.enum';
 import { Collaborators } from '../collaborators/collaborators.entity';
 import { Paths } from '../paths/paths.entity';
+import { ElectoralHistories } from '../electoral-histories/electoral-histories.entity';
 
 @Entity()
 export class Neighborhood {
@@ -52,6 +53,12 @@ export class Neighborhood {
 
   @OneToMany(() => Paths, (path: Paths) => path.neighborhood)
   paths: Paths[];
+
+  @OneToMany(
+    () => ElectoralHistories,
+    (eh: ElectoralHistories) => eh.neighborhood,
+  )
+  electoralHistories: ElectoralHistories[];
 
   @CreateDateColumn({ name: 'created_at' })
   createdAt: Date;

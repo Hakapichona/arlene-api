@@ -1,5 +1,6 @@
 import {
   BadRequestException,
+  ConflictException,
   Injectable,
   Logger,
   NotFoundException,
@@ -71,8 +72,11 @@ export class NeighborhoodService {
     try {
       const newNeighborhood = new Neighborhood();
       this.assignDto(newNeighborhood, neighborhoodDto);
-      return await this.neighborhoodRepository.save(newNeighborhood);
+      await this.neighborhoodRepository.save(newNeighborhood);
     } catch (error) {
+      if (error.code === 'ER_DUP_ENTRY') {
+        throw new ConflictException('Codigo de barrio ya utilizado');
+      }
       this.logger.error(error.message, error.code);
       throw error;
     }
@@ -87,8 +91,11 @@ export class NeighborhoodService {
     try {
       const selectedNeighborhood = await this.getNeighborhood(uuid);
       this.assignDto(selectedNeighborhood, neighborhoodDto);
-      return await this.neighborhoodRepository.save(selectedNeighborhood);
+      await this.neighborhoodRepository.save(selectedNeighborhood);
     } catch (error) {
+      if (error.code === 'ER_DUP_ENTRY') {
+        throw new ConflictException('Codigo de barrio ya utilizado');
+      }
       this.logger.error(error.message, error.code);
       throw error;
     }
