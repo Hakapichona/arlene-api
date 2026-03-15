@@ -18,6 +18,7 @@ async function bootstrap(): Promise<void> {
       whitelist: true,
       transform: true,
       transformOptions: { enableImplicitConversion: true },
+      stopAtFirstError: true,
     }),
   );
   // app.useStaticAssets(join(process.cwd(), 'uploads'), {

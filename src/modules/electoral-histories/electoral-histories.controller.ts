@@ -8,37 +8,39 @@ import {
   Post,
   UseGuards,
 } from '@nestjs/common';
-import { NeighborhoodService } from '../neighborhood/neighborhood.service';
 import { JwtAuthGuard } from '../../guards/jwt-auth.guard';
-import { NeighborhoodDto } from '../neighborhood/dto/neighborhood.dto';
+import { ElectoralHistoriesService } from './electoral-histories.service';
+import { ElectoralHistoryDto } from './dto/electoral-history.dto';
 
 @UseGuards(JwtAuthGuard)
 @Controller('electoral-histories')
 export class ElectoralHistoriesController {
-  constructor(private readonly neighborhoodService: NeighborhoodService) {}
+  constructor(
+    private readonly electoralHistoriesService: ElectoralHistoriesService,
+  ) {}
 
   @Get('/:uuid')
   async getByUuid(@Param('uuid') uuid: string) {
-    return await this.neighborhoodService.getByUuid(uuid);
+    return await this.electoralHistoriesService.getByUuid(uuid);
   }
 
   @Get()
   async getAll() {
-    return await this.neighborhoodService.getAll();
+    return await this.electoralHistoriesService.getAll();
   }
 
   @Post()
-  async create(@Body() data: NeighborhoodDto) {
-    return await this.neighborhoodService.create(data);
+  async create(@Body() data: ElectoralHistoryDto) {
+    return await this.electoralHistoriesService.create(data);
   }
 
   @Patch('/:uuid')
-  async update(@Param('uuid') uuid: string, @Body() data: NeighborhoodDto) {
-    return await this.neighborhoodService.update(uuid, data);
+  async update(@Param('uuid') uuid: string, @Body() data: ElectoralHistoryDto) {
+    return await this.electoralHistoriesService.update(uuid, data);
   }
 
   @Delete('/:uuid')
   async delete(@Param('uuid') uuid: string) {
-    return await this.neighborhoodService.delete(uuid);
+    return await this.electoralHistoriesService.delete(uuid);
   }
 }
