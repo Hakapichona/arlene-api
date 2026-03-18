@@ -43,4 +43,24 @@ export class NeighborhoodDto {
   @IsOptional()
   @IsString()
   contactPhone?: string;
+
+  @IsOptional()
+  @IsString()
+  file1?: string;
+
+  @IsOptional()
+  @IsString()
+  file2?: string;
+
+  @IsOptional()
+  @IsString()
+  file3?: string;
+
+  @IsOptional()
+  @IsString()
+  file4?: string;
+
+  @IsOptional()
+  @IsString()
+  file5?: string;
 }

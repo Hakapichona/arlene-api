@@ -2,6 +2,7 @@ node_modules
 dist
 coverage
 .git
+uploads
 .gitignore
 Dockerfile
 docker-compose.yml

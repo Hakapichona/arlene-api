@@ -24,18 +24,18 @@ export class NeighborhoodService {
     neighborhoodDto: NeighborhoodDto,
   ): void {
     neighborhood.name = neighborhoodDto.name;
-    if (neighborhoodDto.nameCode)
-      neighborhood.nameCode = neighborhoodDto.nameCode;
+    neighborhood.nameCode = neighborhoodDto.nameCode;
     neighborhood.estimatedPopulation = neighborhoodDto.estimatedPopulation;
-    if (neighborhoodDto.status) neighborhood.status = neighborhoodDto.status;
-    if (neighborhoodDto.description)
-      neighborhood.description = neighborhoodDto.description;
-    if (neighborhoodDto.contactName)
-      neighborhood.contactName = neighborhoodDto.contactName;
-    if (neighborhoodDto.contactEmail)
-      neighborhood.contactEmail = neighborhoodDto.contactEmail;
-    if (neighborhoodDto.contactPhone)
-      neighborhood.contactPhone = neighborhoodDto.contactPhone;
+    neighborhood.status = neighborhoodDto.status;
+    neighborhood.description = neighborhoodDto.description;
+    neighborhood.contactName = neighborhoodDto.contactName;
+    neighborhood.contactEmail = neighborhoodDto.contactEmail;
+    neighborhood.contactPhone = neighborhoodDto.contactPhone;
+    neighborhood.file1 = neighborhoodDto.file1;
+    neighborhood.file2 = neighborhoodDto.file2;
+    neighborhood.file3 = neighborhoodDto.file3;
+    neighborhood.file4 = neighborhoodDto.file4;
+    neighborhood.file5 = neighborhoodDto.file5;
   }
 
   async getNeighborhood(uuid: string): Promise<Neighborhood> {

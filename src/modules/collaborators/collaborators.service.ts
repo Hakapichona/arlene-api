@@ -37,9 +37,10 @@ export class CollaboratorsService {
     collaborator.neighborhood = {
       uuid: collaboratorDto.neighborhoodUuid,
     } as Neighborhood;
+    collaborator.file1 = collaboratorDto.file1;
   }
 
-  private async getCollaborator(uuid: string) {
+  async getCollaborator(uuid: string) {
     if (!uuid)
       throw new BadRequestException('El uuid del colaborador es requerido');
 
