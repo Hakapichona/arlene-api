@@ -17,6 +17,9 @@ ENV NODE_ENV=development
 COPY package.json pnpm-lock.yaml ./
 RUN pnpm install --frozen-lockfile
 
+# Crear carpeta de uploads dentro del contenedor
+RUN mkdir -p /usr/src/app/uploads
+
 EXPOSE 3000
 
 CMD ["pnpm", "start:dev"]

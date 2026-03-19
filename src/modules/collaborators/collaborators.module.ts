@@ -4,9 +4,14 @@ import { Collaborators } from './collaborators.entity';
 import { CollaboratorsService } from './collaborators.service';
 import { CollaboratorsController } from './collaborators.controller';
 import { NeighborhoodModule } from '../neighborhood/neighborhood.module';
+import { FilesModule } from '../files/files.module';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Collaborators]), NeighborhoodModule],
+  imports: [
+    TypeOrmModule.forFeature([Collaborators]),
+    NeighborhoodModule,
+    FilesModule,
+  ],
   providers: [CollaboratorsService],
   exports: [CollaboratorsService],
   controllers: [CollaboratorsController],

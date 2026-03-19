@@ -55,6 +55,9 @@ export class Collaborators {
   @Column({ nullable: true })
   interactionHistory?: string;
 
+  @Column({ nullable: true })
+  file1?: string;
+
   @ManyToOne(
     () => Neighborhood,
     (neighborhood: Neighborhood) => neighborhood.collaborators,

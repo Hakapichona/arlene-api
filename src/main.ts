@@ -2,9 +2,12 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { Logger, ValidationPipe } from '@nestjs/common';
 import { NestExpressApplication } from '@nestjs/platform-express';
+import { ConfigService } from '@nestjs/config';
+import { isAbsolute, resolve } from 'path';
 
 async function bootstrap(): Promise<void> {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
+  const configService = app.get(ConfigService);
 
   const port: number = Number(process.env.API_PORT) || 3000;
 
@@ -21,9 +24,21 @@ async function bootstrap(): Promise<void> {
       stopAtFirstError: true,
     }),
   );
-  // app.useStaticAssets(join(process.cwd(), 'uploads'), {
-  //   prefix: '/uploads',
-  // });
+
+  // Sección para files
+  const uploadBaseDir =
+    configService.get<string>('UPLOAD_BASE_DIR') ?? 'uploads';
+
+  const uploadPublicPrefix =
+    configService.get<string>('UPLOAD_PUBLIC_PREFIX') ?? '/uploads';
+
+  const absoluteUploadDir = isAbsolute(uploadBaseDir)
+    ? uploadBaseDir
+    : resolve(process.cwd(), uploadBaseDir);
+
+  app.useStaticAssets(absoluteUploadDir, {
+    prefix: uploadPublicPrefix,
+  });
 
   await app.listen(port);
 

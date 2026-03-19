@@ -10,6 +10,7 @@ import { CollaboratorsModule } from './modules/collaborators/collaborators.modul
 import { PathsModule } from './modules/paths/paths.module';
 import { ElectoralHistoriesModule } from './modules/electoral-histories/electoral-histories.module';
 import { SchoolsModule } from './modules/schools/schools.module';
+import { FilesModule } from './modules/files/files.module';
 
 @Module({
   imports: [
@@ -23,6 +24,7 @@ import { SchoolsModule } from './modules/schools/schools.module';
     PathsModule,
     ElectoralHistoriesModule,
     SchoolsModule,
+    FilesModule,
   ],
 })
 export class AppModule implements NestModule {

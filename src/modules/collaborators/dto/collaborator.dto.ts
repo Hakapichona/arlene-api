@@ -46,4 +46,8 @@ export class CollaboratorDto {
   @IsNotEmpty({ message: 'El barrio es requerido' })
   @IsString()
   neighborhoodUuid: string;
+
+  @IsOptional()
+  @IsString()
+  file1?: string;
 }

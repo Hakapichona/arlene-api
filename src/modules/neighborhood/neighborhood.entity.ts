@@ -46,6 +46,21 @@ export class Neighborhood {
   @Column({ nullable: true })
   contactPhone?: string;
 
+  @Column({ nullable: true })
+  file1?: string;
+
+  @Column({ nullable: true })
+  file2?: string;
+
+  @Column({ nullable: true })
+  file3?: string;
+
+  @Column({ nullable: true })
+  file4?: string;
+
+  @Column({ nullable: true })
+  file5?: string;
+
   @OneToMany(
     () => Collaborators,
     (collaborator: Collaborators) => collaborator.neighborhood,
