@@ -1,18 +1,49 @@
-FROM node:22-bookworm-slim AS base
+# ------------------------------------------------------
+# Builder
+# ------------------------------------------------------
+FROM base AS builder
+
+ENV NODE_ENV=production
+
+COPY package.json pnpm-lock.yaml ./
+RUN pnpm install --frozen-lockfile
+
+COPY . .
+
+RUN pnpm build
+
+# ------------------------------------------------------
+# Production dependencies
+# ------------------------------------------------------
+FROM base AS prod-deps
+
+ENV NODE_ENV=production
+
+COPY package.json pnpm-lock.yaml ./
+RUN pnpm install --prod --frozen-lockfile
+
+# ------------------------------------------------------
+# Production
+# ------------------------------------------------------
+FROM node:22-bookworm-slim AS production
 
 WORKDIR /usr/src/app
 
-RUN corepack enable
+ENV NODE_ENV=production
 
-FROM base AS development
+RUN corepack enable \
+    && groupadd -r nodejs \
+    && useradd -r -g nodejs nodeuser \
+    && mkdir -p /usr/src/app/uploads
 
-ENV NODE_ENV=development
+COPY --from=prod-deps /usr/src/app/node_modules ./node_modules
+COPY --from=builder /usr/src/app/dist ./dist
+COPY --from=builder /usr/src/app/package.json ./package.json
 
-COPY package.json pnpm-lock.yaml ./
-RUN pnpm install
+RUN chown -R nodeuser:nodejs /usr/src/app
 
-RUN mkdir -p /usr/src/app/uploads
+USER nodeuser
 
 EXPOSE 3000
 
-CMD ["pnpm", "start:dev"]
+CMD ["node", "dist/main.js"]
