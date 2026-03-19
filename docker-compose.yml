@@ -7,24 +7,25 @@ services:
       dockerfile: Dockerfile
     env_file:
       - .env
+    environment:
+      NODE_ENV: development
     volumes:
       - .:/usr/src/app
-      - /usr/src/app/node_modules
       - ./uploads:/usr/src/app/uploads
     ports:
       - "3000:3000"
     depends_on:
-      database-arlene-api:
+      database-arlene:
         condition: service_healthy
-    restart: no
+    command: pnpm start:dev
 
-  database-arlene-api:
-    container_name: database-arlene-api
+  database-arlene:
+    container_name: database-arlene
     image: mariadb:lts
     env_file:
       - .env
     volumes:
-      - database-data-arlene-api:/var/lib/mysql
+      - database-data-arlene:/var/lib/mysql
     ports:
       - "3306:3306"
     healthcheck:
@@ -33,7 +34,6 @@ services:
       timeout: 5s
       retries: 5
       start_period: 30s
-    restart: no
 
 volumes:
-  database-data-arlene-api:
+  database-data-arlene:
