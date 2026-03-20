@@ -27,6 +27,7 @@ export class Paths {
   @ManyToOne(
     () => Neighborhood,
     (neighborhood: Neighborhood) => neighborhood.paths,
+    { eager: true },
   )
   @JoinColumn({ name: 'neighborhood_uuid' })
   neighborhood: Neighborhood;
