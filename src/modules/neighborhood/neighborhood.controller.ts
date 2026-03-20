@@ -60,7 +60,7 @@ export class NeighborhoodController {
     const uploadedUrls: string[] = [];
     try {
       for (const field of NEIGHBORHOOD_FILE_FIELDS) {
-        const file = files[field]?.[0];
+        const file = files?.[field]?.[0];
         if (!file) continue;
 
         const uploaded = await this.filesService.store(file, {
@@ -106,7 +106,7 @@ export class NeighborhoodController {
         await this.neighborhoodService.getNeighborhood(uuid);
 
       for (const field of NEIGHBORHOOD_FILE_FIELDS) {
-        const file = files[field]?.[0];
+        const file = files?.[field]?.[0];
         if (!file) continue;
 
         const uploaded = await this.filesService.store(file, {

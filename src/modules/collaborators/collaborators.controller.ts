@@ -60,7 +60,7 @@ export class CollaboratorsController {
     const uploadedUrls: string[] = [];
     try {
       for (const field of COLLABORATOR_FILE_FIELDS) {
-        const file = files[field]?.[0];
+        const file = files?.[field]?.[0];
         if (!file) continue;
 
         const uploaded = await this.filesService.store(file, {
@@ -105,7 +105,7 @@ export class CollaboratorsController {
         await this.collaboratorService.getCollaborator(uuid);
 
       for (const field of COLLABORATOR_FILE_FIELDS) {
-        const file = files[field]?.[0];
+        const file = files?.[field]?.[0];
         if (!file) continue;
 
         const uploaded = await this.filesService.store(file, {
