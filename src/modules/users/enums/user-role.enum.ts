@@ -3,4 +3,5 @@ export enum UsersRole {
   ADMIN = 'admin',
   USER = 'user',
   CANDIDATE = 'candidate',
+  REFERENTE = 'referente',
 }
