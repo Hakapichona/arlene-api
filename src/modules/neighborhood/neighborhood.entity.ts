@@ -61,6 +61,9 @@ export class Neighborhood {
   @Column({ nullable: true })
   file5?: string;
 
+  @Column({ nullable: true, type: 'longtext', default: '[]' })
+  route: string;
+
   @OneToMany(
     () => Collaborators,
     (collaborator: Collaborators) => collaborator.neighborhood,
