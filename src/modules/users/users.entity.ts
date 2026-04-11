@@ -42,6 +42,9 @@ export class Users {
   })
   status: UserStatus;
 
+  @Column({ nullable: true })
+  createdBy?: string;
+
   @CreateDateColumn({ name: 'created_at' })
   createdAt: Date;
 
