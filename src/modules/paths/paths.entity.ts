@@ -9,6 +9,7 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 import { Neighborhood } from '../neighborhood/neighborhood.entity';
+import { Users } from '../users/users.entity';
 
 @Entity()
 export class Paths {
@@ -26,6 +27,10 @@ export class Paths {
 
   @Column({ nullable: true, type: 'longtext', default: '[]' })
   route: string;
+
+  @ManyToOne(() => Users, (users: Users) => users.paths, { eager: true })
+  @JoinColumn({ name: 'user_uuid' })
+  createdBy: Users;
 
   @ManyToOne(
     () => Neighborhood,

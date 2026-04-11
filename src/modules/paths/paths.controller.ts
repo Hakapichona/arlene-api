@@ -11,6 +11,8 @@ import {
 import { JwtAuthGuard } from '../../guards/jwt-auth.guard';
 import { PathsService } from './paths.service';
 import { PathDto } from './dto/path.dto';
+import { GetUser } from '../../decorators/get-user.decorator';
+import { Users } from '../users/users.entity';
 
 @Controller('paths')
 @UseGuards(JwtAuthGuard)
@@ -28,8 +30,8 @@ export class PathsController {
   }
 
   @Post()
-  async create(@Body() pathDto: PathDto) {
-    return await this.pathsService.create(pathDto);
+  async create(@Body() pathDto: PathDto, @GetUser() user: Users) {
+    return await this.pathsService.create(pathDto, user);
   }
 
   @Patch('/:uuid')

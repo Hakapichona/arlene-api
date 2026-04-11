@@ -6,10 +6,12 @@ import {
   Entity,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
+  OneToMany,
 } from 'typeorm';
 import { UsersRole } from './enums/user-role.enum';
 import { UserStatus } from './enums/user-status.enum';
 import bcrypt from 'bcrypt';
+import { Paths } from '../paths/paths.entity';
 
 @Entity()
 export class Users {
@@ -41,6 +43,9 @@ export class Users {
     default: UserStatus.PENDING,
   })
   status: UserStatus;
+
+  @OneToMany(() => Paths, (paths: Paths) => paths.createdBy)
+  paths: Paths[];
 
   @Column({ nullable: true })
   createdBy?: string;
