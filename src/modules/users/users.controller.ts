@@ -50,17 +50,21 @@ export class UsersController {
     return this.toUserResponseDto(selectedUser);
   }
 
-  @AdminOnly()
   @Get()
-  async getAll(): Promise<UserResponseDto[]> {
-    const users = await this.usersService.getAll();
+  async getAll(@GetUser() user: CurrentUser): Promise<UserResponseDto[]> {
+    const users = await this.usersService.getAll(user);
     return users.map((user) => this.toUserResponseDto(user));
   }
 
-  @AdminOnly()
   @Post()
-  async create(@Body() createUserDto: CreateUserDto): Promise<UserResponseDto> {
-    const createdUser = await this.usersService.createByAdmin(createUserDto);
+  async create(
+    @Body() createUserDto: CreateUserDto,
+    @GetUser() user: CurrentUser,
+  ): Promise<UserResponseDto> {
+    const createdUser = await this.usersService.createByAdmin(
+      createUserDto,
+      user,
+    );
     return this.toUserResponseDto(createdUser);
   }
 

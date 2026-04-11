@@ -5,12 +5,14 @@ import {
   Entity,
   JoinColumn,
   ManyToOne,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
 import { PoliticsRole } from './enums/politics-role.enum';
 import { CollaboratorStatus } from './enums/collaborato-status.enum';
 import { Neighborhood } from '../neighborhood/neighborhood.entity';
+import { SchoolTable } from '../schools/school-tables.entity';
 
 @Entity()
 export class Collaborators {
@@ -57,6 +59,9 @@ export class Collaborators {
 
   @Column({ nullable: true })
   file1?: string;
+
+  @OneToMany(() => SchoolTable, (table: SchoolTable) => table.school)
+  tables: SchoolTable[];
 
   @ManyToOne(
     () => Neighborhood,

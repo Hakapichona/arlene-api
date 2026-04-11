@@ -63,4 +63,8 @@ export class NeighborhoodDto {
   @IsOptional()
   @IsString()
   file5?: string;
+
+  @IsOptional()
+  @IsString()
+  route: string;
 }

@@ -24,6 +24,9 @@ export class Paths {
   @Column({ nullable: true })
   additionalInformation?: string;
 
+  @Column({ nullable: true, type: 'longtext', default: '[]' })
+  route: string;
+
   @ManyToOne(
     () => Neighborhood,
     (neighborhood: Neighborhood) => neighborhood.paths,

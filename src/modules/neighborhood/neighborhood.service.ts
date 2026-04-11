@@ -36,6 +36,7 @@ export class NeighborhoodService {
     neighborhood.file3 = neighborhoodDto.file3;
     neighborhood.file4 = neighborhoodDto.file4;
     neighborhood.file5 = neighborhoodDto.file5;
+    neighborhood.route = neighborhoodDto.route;
   }
 
   async getNeighborhood(uuid: string): Promise<Neighborhood> {
