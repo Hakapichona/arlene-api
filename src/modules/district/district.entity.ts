@@ -3,37 +3,25 @@ import {
   CreateDateColumn,
   DeleteDateColumn,
   Entity,
-  JoinColumn,
-  ManyToOne,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
 import { Neighborhood } from '../neighborhood/neighborhood.entity';
 
 @Entity()
-export class Paths {
+export class District {
   @PrimaryGeneratedColumn('uuid')
   uuid: string;
 
   @Column()
-  date: Date;
-
-  @Column()
-  observations: string;
+  name: string;
 
   @Column({ nullable: true })
-  additionalInformation?: string;
+  code?: string;
 
-  @Column({ nullable: true, type: 'longtext', default: '[]' })
-  route: string;
-
-  @ManyToOne(
-    () => Neighborhood,
-    (neighborhood: Neighborhood) => neighborhood.paths,
-    { eager: true },
-  )
-  @JoinColumn({ name: 'neighborhood_uuid' })
-  neighborhood: Neighborhood;
+  @OneToMany(() => Neighborhood, (nb: Neighborhood) => nb.district)
+  neighborhoods: Neighborhood[];
 
   @CreateDateColumn({ name: 'created_at' })
   createdAt: Date;

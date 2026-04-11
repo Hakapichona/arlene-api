@@ -16,6 +16,8 @@ import { UserStatus } from './enums/user-status.enum';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { RegisterDto } from './dto/register.dto';
+import { CurrentUser } from '../auth/auth-utils/current-user.interface';
+import { UsersRole } from './enums/user-role.enum';
 
 @Injectable()
 export class UsersService {
@@ -107,7 +109,10 @@ export class UsersService {
     }
   }
 
-  async createByAdmin(createUserDto: CreateUserDto): Promise<Users> {
+  async createByAdmin(
+    createUserDto: CreateUserDto,
+    user?: CurrentUser,
+  ): Promise<Users> {
     const newUser = new Users();
 
     this.buildBaseUserData(newUser, createUserDto);
@@ -118,6 +123,10 @@ export class UsersService {
 
     if (createUserDto.status !== undefined) {
       newUser.status = createUserDto.status;
+    }
+
+    if (createUserDto.role !== UsersRole.ADMIN) {
+      newUser.createdBy = user?.uuid;
     }
 
     try {
@@ -141,9 +150,15 @@ export class UsersService {
     }
   }
 
-  async getAll(): Promise<Users[]> {
+  async getAll(user?: CurrentUser): Promise<Users[]> {
     try {
-      return await this.usersRepository.find();
+      console.log(user?.role);
+      if (user?.role === UsersRole.ADMIN) {
+        return await this.usersRepository.find();
+      }
+      return await this.usersRepository.find({
+        where: { createdBy: user?.uuid },
+      });
     } catch (error: any) {
       this.logger.error(error.message, error.code);
       throw error;

@@ -13,6 +13,10 @@ export class PathDto {
   @IsString()
   additionalInformation?: string;
 
+  @IsOptional()
+  @IsString()
+  route: string;
+
   @IsNotEmpty({ message: 'El barrio es requerido' })
   @IsString()
   neighborhoodUuid: string;

@@ -11,6 +11,7 @@ import { PathsModule } from './modules/paths/paths.module';
 import { ElectoralHistoriesModule } from './modules/electoral-histories/electoral-histories.module';
 import { SchoolsModule } from './modules/schools/schools.module';
 import { FilesModule } from './modules/files/files.module';
+import { DistrictModule } from './modules/district/district.module';
 
 @Module({
   imports: [
@@ -25,6 +26,7 @@ import { FilesModule } from './modules/files/files.module';
     ElectoralHistoriesModule,
     SchoolsModule,
     FilesModule,
+    DistrictModule,
   ],
 })
 export class AppModule implements NestModule {
