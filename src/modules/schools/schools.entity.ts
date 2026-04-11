@@ -5,10 +5,12 @@ import {
   Entity,
   JoinColumn,
   ManyToOne,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
 import { Neighborhood } from '../neighborhood/neighborhood.entity';
+import { SchoolTable } from './school-tables.entity';
 
 @Entity()
 export class Schools {
@@ -29,6 +31,9 @@ export class Schools {
   })
   @JoinColumn({ name: 'neighborhood_uuid' })
   neighborhood: Neighborhood;
+
+  @OneToMany(() => SchoolTable, (table: SchoolTable) => table.school)
+  tables: SchoolTable[];
 
   @CreateDateColumn({ name: 'created_at' })
   createdAt: Date;
