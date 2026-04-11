@@ -24,6 +24,7 @@ export class PathsService {
     path.observations = pathDto.observations;
     path.additionalInformation = pathDto.additionalInformation;
     path.neighborhood = { uuid: pathDto.neighborhoodUuid } as Neighborhood;
+    path.route = pathDto.route;
   }
 
   async getPath(uuid: string) {
