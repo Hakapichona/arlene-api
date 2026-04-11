@@ -10,6 +10,7 @@ import { Repository } from 'typeorm';
 import { PathDto } from './dto/path.dto';
 import { NeighborhoodService } from '../neighborhood/neighborhood.service';
 import { Neighborhood } from '../neighborhood/neighborhood.entity';
+import { Users } from '../users/users.entity';
 
 @Injectable()
 export class PathsService {
@@ -52,11 +53,12 @@ export class PathsService {
     }
   }
 
-  async create(pathDto: PathDto) {
+  async create(pathDto: PathDto, user: Users) {
     try {
       await this.neighborhoodService.getNeighborhood(pathDto.neighborhoodUuid);
       const newPath = new Paths();
       this.assignDto(newPath, pathDto);
+      newPath.createdBy = user;
       await this.pathsRepository.save(newPath);
     } catch (error) {
       this.logger.error(error.message, error.code);
