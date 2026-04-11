@@ -10,12 +10,15 @@ import { Neighborhood } from './neighborhood.entity';
 import { Repository } from 'typeorm';
 import { NeighborhoodDto } from './dto/neighborhood.dto';
 import { NeighborhoodStatus } from './enums/neighborhood-status.enum';
+import { District } from '../district/district.entity';
+import { DistrictService } from '../district/district.service';
 
 @Injectable()
 export class NeighborhoodService {
   constructor(
     @InjectRepository(Neighborhood)
     private readonly neighborhoodRepository: Repository<Neighborhood>,
+    private readonly districtService: DistrictService,
   ) {}
   readonly logger = new Logger('NeighborhoodService');
 
@@ -37,6 +40,7 @@ export class NeighborhoodService {
     neighborhood.file4 = neighborhoodDto.file4;
     neighborhood.file5 = neighborhoodDto.file5;
     neighborhood.route = neighborhoodDto.route;
+    neighborhood.district = { uuid: neighborhoodDto.districtUuid } as District;
   }
 
   async getNeighborhood(uuid: string): Promise<Neighborhood> {
@@ -71,6 +75,7 @@ export class NeighborhoodService {
       );
     }
     try {
+      await this.districtService.getDistrict(neighborhoodDto.districtUuid);
       const newNeighborhood = new Neighborhood();
       this.assignDto(newNeighborhood, neighborhoodDto);
       await this.neighborhoodRepository.save(newNeighborhood);

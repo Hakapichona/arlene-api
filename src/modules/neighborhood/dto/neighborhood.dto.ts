@@ -67,4 +67,8 @@ export class NeighborhoodDto {
   @IsOptional()
   @IsString()
   route: string;
+
+  @IsOptional()
+  @IsString()
+  districtUuid: string;
 }

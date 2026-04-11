@@ -3,6 +3,8 @@ import {
   CreateDateColumn,
   DeleteDateColumn,
   Entity,
+  JoinColumn,
+  ManyToOne,
   OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
@@ -12,6 +14,7 @@ import { Collaborators } from '../collaborators/collaborators.entity';
 import { Paths } from '../paths/paths.entity';
 import { ElectoralHistories } from '../electoral-histories/electoral-histories.entity';
 import { Schools } from '../schools/schools.entity';
+import { District } from '../district/district.entity';
 
 @Entity()
 export class Neighborhood {
@@ -81,6 +84,10 @@ export class Neighborhood {
 
   @OneToMany(() => Schools, (school: Schools) => school.neighborhood)
   schools: Schools[];
+
+  @ManyToOne(() => District, (district: District) => district.neighborhoods)
+  @JoinColumn({ name: 'district_uuid' })
+  district: District;
 
   @CreateDateColumn({ name: 'created_at' })
   createdAt: Date;
