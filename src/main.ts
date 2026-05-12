@@ -14,6 +14,10 @@ async function bootstrap(): Promise<void> {
   app.enableShutdownHooks();
   app.enableCors({
     credentials: true,
+    origin: [
+      'https://admin.arleneaquino.com.py',
+      'https://arleneaquino.com.py',
+    ],
   });
 
   app.useGlobalPipes(
